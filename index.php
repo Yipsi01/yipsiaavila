@@ -22,14 +22,12 @@ if (isset($_GET["page"])) {
     $pageRequest = $_GET["page"];
 }
 
-//Incorporando los midlewares son codigos que se deben ejecutar
-//Siempre
+
+
 require_once "controllers/mw/verificar.mw.php";
 require_once "controllers/mw/site.mw.php";
 
-// aqui no se toca jajaja la funcion de este index es
-// llamar al controlador adecuado para manejar el
-// index.php?page=modulo
+
 
     //Este switch se encarga de todo el enrutamiento público
 switch ($pageRequest) {

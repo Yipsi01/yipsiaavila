@@ -10,9 +10,11 @@ require_once "libs/dao.php";
     `paginas`.`yyam_urlcdn`
 FROM `yipsiavila`.`paginas`;*/
 
-
-* @return Array
-*/
+/**
+ * Obtiene los registro de la tabla de modas
+ *
+ * @return Array
+ */
 function obtenerListas()
 {
    $sqlstr = "select `paginas`.`yyam_codigo`,
@@ -22,9 +24,9 @@ function obtenerListas()
    `paginas`.`yyam_urlcdn`
 FROM `yipsiavila`.`paginas`";
 
-   $modas = array();
-   $modas = obtenerRegistros($sqlstr);
-   return $modas;
+   $paginas = array();
+   $paginas = obtenerRegistros($sqlstr);
+   return $paginas;
 }
 
 function obtenerPaginasPorId($id)
@@ -37,7 +39,7 @@ function obtenerPaginasPorId($id)
 FROM `yipsiavila`.`paginas`where yyam_codigo=%d";
 
  $paginas= array();
- $paginas=obtenerUnRegistro(sprintf($sqlstr, $id));
+ $paginas=obtenerUnRegistro(sprintf($sqlstr));
  return $paginas;
 }
 
@@ -46,7 +48,7 @@ function obtenerEstadoPorId($id)
  $sqlstr="select `paginas`.`yyam_estado`
        from `yipsiavila`.`paginas` where yyam_codigo=%d";
  $paginas= array();
- $paginas=obtenerUnRegistro(sprintf($sqlstr, $id));
+ $paginas=obtenerUnRegistro(sprintf($sqlstr));
  return $paginas;
 }
 
@@ -98,7 +100,7 @@ function modificarPaginas($yyam_plugin,  $yyam_estado,$yyam_urlhomepage,$yyam_ur
        )
    );
 }
-function eliminarPaginas($idjuguete)
+function eliminarPaginas($yyam_codigo)
 {
    $delSQL = "DELETE FROM paginas where yyam_codigo=%d;";
 
@@ -109,7 +111,4 @@ function eliminarPaginas($idjuguete)
        )
    );
 }
-?>
-
-
 ?>

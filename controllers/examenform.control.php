@@ -29,27 +29,27 @@
       $viewData["xcfrt"] = $_SESSION["xcfrt"];
       if (isset($_POST["btnDsp"])) {
           $mode = "DSP";
-          $moda = obtenerPaginasPorId($_POST["yyam_codigo"]);
+          $paginas = obtenerPaginasPorId($_POST["yyam_codigo"]);
           $selectedEst=$moda["yyam_estado"];
           $viewData["showBtnConfirmar"] = false;
           $viewData["readonly"] = 'readonly';
           $viewData["selectDisable"] = 'disabled';
-          mergeFullArrayTo($moda, $viewData);
+          mergeFullArrayTo($paginas, $viewData);
           $viewData["modeDsc"] = $modeDesc[$mode] . $viewData["yyam_plugin"];
       }
       if (isset($_POST["btnUpd"])) {
           $mode = "UPD";
           //Vamos A Cargar los datos
-          $moda = obtenerPaginasPorId($_POST["yyam_codigo"]);
-          $selectedEst=$moda["yyam_estado"];
-          mergeFullArrayTo($moda, $viewData);
+          $paginas = obtenerPaginasPorId($_POST["yyam_codigo"]);
+          $selectedEst=$paginas["yyam_estado"];
+          mergeFullArrayTo($paginas, $viewData);
           $viewData["modeDsc"] = $modeDesc[$mode] . $viewData["yyam_plugin"];
       }
       if (isset($_POST["btnDel"])) {
           $mode = "DEL";
           //Vamos A Cargar los datos
-          $moda = obtenerPaginasPorId($_POST["yyam_codigo"]);
-          $selectedEst=$moda["yyam_estado"];
+          $paginas = obtenerPaginasPorId($_POST["yyam_codigo"]);
+          $selectedEst=$paginas["yyam_estado"];
           $viewData["readonly"] = 'readonly';
           $viewData["selectDisable"] = 'disabled';
           mergeFullArrayTo($moda, $viewData);
@@ -59,13 +59,7 @@
 
 
 
-      if (isset($_POST["btnIns"])) {
-          $mode = "INS";
-          //Vamos A Cargar los datos
-          $viewData["modeDsc"] = $modeDesc[$mode];
-           $viewData["showyyam_codigo"]  = false;
-      }
-
+    
 
       if (isset($_POST["btnConfirmar"])) {
           $mode = $_POST["mode"];

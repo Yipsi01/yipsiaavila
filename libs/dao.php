@@ -29,18 +29,18 @@ $conexion->set_charset("utf8");
  *
  * @param string $sqlstr   Cadena SQL a ejecutar
  * @param object $conexion Objecto de Conexión por Referencia
- * 
+ *
  * @return array
  */
 function obtenerRegistros($sqlstr, &$conexion = null )
 {
     if (!$conexion) {
         global $conexion;
-    } 
+    }
     $result = $conexion->query($sqlstr);
     if ($conexion->connect_errno ) {
         error_log($conexion->connect_error);
-    } 
+    }
     $resultArray = array();
 
     if (isset($result) && $result != '' ) {
@@ -57,10 +57,10 @@ function obtenerRegistros($sqlstr, &$conexion = null )
  *
  * @param string $sqlstr   Cadena SQL a ejecutar
  * @param object $conexion Objecto de Conexión por Referencia
- * 
+ *
  * @return array
  */
-function obtenerUnRegistro($sqlstr, &$conexion = null ) 
+function obtenerUnRegistro($sqlstr, &$conexion = null )
 {
     if (!$conexion) {
         global $conexion;
@@ -78,14 +78,14 @@ function obtenerUnRegistro($sqlstr, &$conexion = null )
  * Inicia la Transacción en Mysql
  *
  * @param object $conexion Objecto de Conexión por Referencia
- * 
+ *
  * @return void
  */
-function iniciarTransaccion(&$conexion = null ) 
+function iniciarTransaccion(&$conexion = null )
 {
     if (!$conexion) {
         global $conexion;
-    } 
+    }
     $conexion->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
     if ($conexion->errno ) {
         error_log($conexion->error);
@@ -96,17 +96,17 @@ function iniciarTransaccion(&$conexion = null )
  *
  * @param boolean $commit   Verdadero Confirma los Cambios en la Base de Datos
  * @param object  $conexion Objecto de Conexión por Referencia
- * 
+ *
  * @return void
  */
 function terminarTransaccion($commit=true,&$conexion = null)
 {
     if (!$conexion) {
         global $conexion;
-    } 
+    }
     if ($commit && true ) {
         $conexion->commit();
-        if ($conexion->errno ) {
+        if ($conexion->error ) {
             error_log($conexion->error);
         }
     } else {
@@ -121,62 +121,62 @@ function terminarTransaccion($commit=true,&$conexion = null)
  *
  * @param string $sqlstr   Cadena SQL a ejecutar
  * @param object $conexion Objecto de Conexión por Referencia
- * 
+ *
  * @return integer Número de Registro Afectados
  */
 function ejecutarNonQuery($sqlstr, &$conexion = null)
 {
     if (!$conexion ) {
         global $conexion;
-    } 
+    }
     $result = $conexion->query($sqlstr);
     if ($conexion->errno ) {
         error_log($conexion->error);
     }
-    return $conexion->affected_rows >= 0; 
+    return $conexion->affected_rows >= 0;
 }
 /**
  * Convierta Cadenas de Texto Peligrosas en Sanas para Queries
  *
  * @param string $str      Cadena de Texto a sanear
- * @param object $conexion Objecto de Conexión por Referencia 
- * 
+ * @param object $conexion Objecto de Conexión por Referencia
+ *
  * @return string
  */
 function valstr($str, &$conexion = null)
 {
     if (!$conexion ) {
         global $conexion;
-    } 
+    }
     return $conexion->escape_string($str);
 }
 /**
  * Obtiene el Último Autonumérico generado
  *
- * @param object $conexion Objecto de Conexión por Referencia 
- * 
+ * @param object $conexion Objecto de Conexión por Referencia
+ *
  * @return integer
  */
-function getLastInserId(&$conexion = null) 
+function getLastInserId(&$conexion = null)
 {
     if (!$conexion ) {
         global $conexion;
-    } 
+    }
     return $conexion->insert_id;
 }
 /**
  * Muestra los Errores de la Conexión de la última ejecución de comandos
  * en el cliente de Mysql
  *
- * @param object $conexion Objecto de Conexión por Referencia 
- * 
+ * @param object $conexion Objecto de Conexión por Referencia
+ *
  * @return string
  */
 function showErrors(&$conexion = null)
 {
     if (!$conexion ) {
         global $conexion;
-    } 
+    }
     echo $conexion->error;
 }
 ?>
